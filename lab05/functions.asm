@@ -126,7 +126,7 @@ PrintReverse:
 loop:
     blt $s2, $zero, end_loop
     sll $t0, $s2, 2 # number of bytes to offset
-    add $t1, $s2, $s0 # address of word to load
+    addu $t1, $t0, $s0 # address of word to load
     lw $t2, 0($t1)
 
     li $v0, 1
