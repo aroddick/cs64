@@ -145,7 +145,9 @@ loop:
     sll $t1, $t0, 2 # bit shift index by two
     addiu $t2, $s0, $t1 # put address of element in $t2
     lw $t3, 0($t2) # load next integer
-    bgt $t3, $s3, set_max
+    bgt $s3, $t3, print
+
+    move $s3, $t3
 
 print:
     li $v0, 1
@@ -158,10 +160,6 @@ print:
     syscall
     jal ConventionCheck
     j loop
-
-set_max:
-    move $s3, $t3
-    j print
 
 end_loop:
     lw $s0, 0($sp)
