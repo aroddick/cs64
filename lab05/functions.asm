@@ -116,7 +116,10 @@ Exit:
 
 PrintReverse:
     # TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
-
+    addui $sp, $sp, -12
+    sw $s0, 0($sp)
+    sw $s1, 4($sp)
+    sw $s2, 8($sp)
     move $s0, $a0 # address of array
     move $s1, $a1 # length of array
     addi $s2, $s1, -1 # index
@@ -136,7 +139,10 @@ loop:
     jal ConventionCheck
     j loop
 
-
 end_loop:
     # Do not remove this line
+    lw $s0, 0($sp)
+    lw $s1, 4($sp)
+    lw $s2, 8($sp)
+    addui $sp, $sp, 12
     jr      $ra
