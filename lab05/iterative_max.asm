@@ -115,7 +115,51 @@ Exit:
 # COPYFROMHERE - DO NOT REMOVE THIS LINE
 
 IterativeMax:
-    #TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
+    # TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
+    addiu $sp, $sp, -20 # move stack pointer to accomadate 3 words
+    sw $s0, 0($sp)
+    sw $s1, 4($sp)
+    sw $s2, 8($sp)
+    sw $s3, 12($sp)
+    sw $ra, 16($sp)
+    move $s0, $a0 # address of array
+    move $s1, $a1 # length of array
+    li $s2, 0 # index
+    lw $s3, 0($s0) # load first integer and set as max
+
+    li $v0, 1
+    move $a0, $s3
+    syscall
+    syscall
+    addi $s2, $s2, 1
+
+loop:
+    slt $t0, $s2, $s1
+    beq $t0, $zero, loop_exit
+    sll $t1, $t0, 2 # bit shift index by two
+    addiu $t2, $s0, $t1 # put address of element in $t2
+    lw $t3, 0($t2)
+    bgt $t3, $s3, set_max
+
+print:
+    li $v0, 1
+    move $a0, $t3 # print current integer
+    syscall
+    move $a0, $s3 # print max integer
+    syscall
+    j loop
+
+set_max:
+    move $s3, $t3
+    j print
+
+loop_exit:
+    lw $s0, 0($sp)
+    lw $s1, 4($sp)
+    lw $s2, 8($sp)
+    lw $s3, 12($sp)
+    lw $ra, 16($sp)
+    addiu $sp, $sp, 20
 
     # Do not remove this line
     jr      $ra
