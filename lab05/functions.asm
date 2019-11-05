@@ -116,7 +116,7 @@ Exit:
 
 PrintReverse:
     # TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
-    addui $sp, $sp, -12 # move stack pointer to accomadate 3 words
+    addiu $sp, $sp, -12 # move stack pointer to accomadate 3 words
     sw $s0, 0($sp)
     sw $s1, 4($sp)
     sw $s2, 8($sp)
@@ -144,5 +144,5 @@ end_loop:
     lw $s0, 0($sp)
     lw $s1, 4($sp)
     lw $s2, 8($sp)
-    addui $sp, $sp, 12
+    addiu $sp, $sp, 12
     jr      $ra
