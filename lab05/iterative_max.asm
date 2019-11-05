@@ -130,6 +130,14 @@ IterativeMax:
     li $v0, 1
     move $a0, $s3
     syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+    li $v0, 1
+    move $a0, $s3
+    syscall
+    li $v0, 4
+    la $a0, newline
     syscall
     addi $s2, $s2, 1
 
@@ -145,7 +153,13 @@ print:
     li $v0, 1
     move $a0, $t3 # print current integer
     syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
     move $a0, $s3 # print max integer
+    syscall
+    li $v0, 4
+    la $a0, newline
     syscall
     j loop
 
