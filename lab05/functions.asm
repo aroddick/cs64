@@ -132,9 +132,7 @@ loop:
     li $v0, 1
     move $a0, $t2
     syscall
-    li $v0, 4
-    la $a0, newline
-    syscall
+
     addi $s2, $s2, -1
     jal ConventionCheck
     j loop
