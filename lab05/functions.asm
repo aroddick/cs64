@@ -117,5 +117,26 @@ Exit:
 PrintReverse:
     # TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
 
+    move $s0, $a0 # address of array
+    move $s1, $a1 # length of array
+    addi $s2, $s1, -1 # index
+loop:
+    blt $s2, $zero, end_loop
+    sll $t0, $s2, 2 # number of bytes to offset
+    add $t1, $s2, $s0 # address of word to load
+    lw $t2, 0($t1)
+
+    li $v0, 1
+    move $a0, $t2
+    syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+    addi $s2, $s2, -1
+    jal ConventionCheck
+    j loop
+
+
+end_loop:
     # Do not remove this line
     jr      $ra
