@@ -156,6 +156,7 @@ print:
     li $v0, 4
     la $a0, newline
     syscall
+    li $v0, 1
     move $a0, $s3 # print max integer
     syscall
     jal ConventionCheck
