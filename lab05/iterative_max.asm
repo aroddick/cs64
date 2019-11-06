@@ -127,17 +127,8 @@ IterativeMax:
     li $s2, 0 # index
     lw $s3, 0($s0) # load first integer and set as max
 
-    li $v0, 1
-    move $a0, $s3
-    syscall
-    li $v0, 4
-    la $a0, newline
-    syscall
-    li $v0, 1
-    move $a0, $s3
-    syscall
-    addi $s2, $s2, 1
-    jal ConventionCheck
+    move $t3, $s3
+    j print
 
 loop:
     slt $t0, $s2, $s1
