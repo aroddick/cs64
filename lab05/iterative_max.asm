@@ -143,7 +143,7 @@ loop:
     slt $t0, $s2, $s1
     beq $t0, $zero, end_loop
     sll $t1, $s2, 2 # bit shift index by two
-    addiu $t2, $s0, $t1 # put address of element in $t2
+    addu $t2, $s0, $t1 # put address of element in $t2
     lw $t3, 0($t2) # load next integer
     bgt $s3, $t3, print
 
