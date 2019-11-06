@@ -131,7 +131,7 @@ IterativeMax:
     j print
 
 loop:
-    sll $t1, $t0, 2 # bit shift index by two
+    sll $t1, $s2, 2 # bit shift index by two
     addiu $t2, $s0, $t1 # put address of element in $t2
     lw $t3, 0($t2) # load next integer
     bgt $s3, $t3, print
