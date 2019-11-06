@@ -127,10 +127,21 @@ IterativeMax:
     li $s2, 0 # index
     lw $s3, 0($s0) # load first integer and set as max
 
-    move $t3, $s3
-    j print
+    li $v0, 1
+    move $a0, $s3
+    syscall
+    li $v0, 4
+    la $a0, newline
+    syscall
+    li $v0, 1
+    move $a0, $s3
+    syscall
+    addi $s2, $s2, 1
+    jal ConventionCheck
 
 loop:
+    slt $t0, $s2, $s1
+    beq $t0, $zero, end_loop
     sll $t1, $s2, 2 # bit shift index by two
     addiu $t2, $s0, $t1 # put address of element in $t2
     lw $t3, 0($t2) # load next integer
@@ -149,7 +160,7 @@ print:
     syscall
     jal ConventionCheck
     addi $s2, $s2, 1
-    blt $s2, $s1, loop
+    j loop
 
 end_loop:
     lw $s0, 0($sp)
